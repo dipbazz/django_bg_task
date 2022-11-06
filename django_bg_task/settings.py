@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import yaml
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+Credentials = yaml.safe_load(open('credentials.yaml'))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -126,3 +129,21 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = Credentials['email_backend']
+EMAIL_HOST = Credentials['email_host']
+EMAIL_HOST_USER = Credentials['email_username']
+EMAIL_HOST_PASSWORD = Credentials['email_password']
+EMAIL_PORT = Credentials['email_port']
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+
+# CELERY STUFF
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE

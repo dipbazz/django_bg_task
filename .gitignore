@@ -5,3 +5,5 @@ logs/
 db.sqlite3
 .env
 .vscode
+credentials.yaml
+dump.rdb
