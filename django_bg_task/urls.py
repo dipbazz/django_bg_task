@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from account.views import UserSignupView, SuccessPage
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('signup/', UserSignupView.as_view(), name="signup"),
+    path('success',SuccessPage.as_view(), name="success_page"),
 ]
